@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Class</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  // function Point(x, y) {
+  //   this.x = x;
+  //   this.y = y;
+  // }
+  // Point.prototype.toString = function() {
+  //   return '('+this.x +','+this.y+')';
+  // }
+  // let p = new Point(3, 6);
+  // console.log(p.toString())
+
+  // class Point {
+  //   constructor(x, y) {
+  //     this.x = x;
+  //     this.y = y;
+  //   }
+  //   toString() {
+  //     return `(${this.x},${this.y})`
+  //   }
+  // }
+
+  // let p = new Point(5, 6);
+  // let p_1 = new Point(7, 8);
+  // console.log(p.toString());
+  // console.log(p.hasOwnProperty('x'),p.hasOwnProperty('y'),p.hasOwnProperty('toString'),p.__proto__.hasOwnProperty('toString'));
+  // p.__proto__.sayName = function() {
+  //   console.log(this.x)
+  // }
+  // p_1.sayName();
+
+  // let person = class {
+  //   constructor(name) {
+  //     this.name = name;
+  //   }
+  //   sayName() {
+  //     console.log(this.name);
+  //   }
+  // }
+  // let p = new person('Kiy');
+  // p.sayName();
+  // let obj = {};
+  // if (JSON.stringify(obj) === "{}") {
+  //   console.log(123)
+  // } else {
+  //   console.log(321)
+  // }
+
+  class Point {
+    constructor(x, y) {
+      this.x = x;
+      this.y = y;
+    }
+    toString() {
+      return `(${this.x},${this.y})`;
+    }
+  }
+
+  class ColorPoint extends Point {
+    constructor(color,...args) {
+      super(...args);
+      this.color = color;
+    }
+    toString() {
+      return `${this.color}, ${super.toString()}`
+    }
+  }
+  let p = new ColorPoint(1, 2, 3);
+  console.log(p.toString());
+
+  class SunPoint extends ColorPoint {
+    constructor(sun,...args) {
+      super(...args);
+      this.sun = sun;
+    }
+    toString() {
+      return `${this.sun}, ${super.toString()}`
+    }
+  }
+  let p_1 = new SunPoint(4,3,2,1);
+  console.log(p_1.toString())
+</script>
+
+</html>

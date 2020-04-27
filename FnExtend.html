@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Function Extend</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  function fn_1(x, y) {
+    return { x, y };
+  };
+  console.log(fn_1(1, 2));
+  let o = {
+    say() {
+      console.log('Hello world!');
+    },
+    *m() {
+      yield "Hello world!"
+    }
+  };
+  o.say();
+  console.log(o.m());
+  console.log(Object.is(NaN, NaN));
+
+
+  let obj_1 = {
+    a: 1
+  };
+  let obj_2 = {
+    b: 2
+  };
+  // Object.assign(obj_1, obj_2);
+  obj_1 = obj_2;
+  obj_2.b = 3;
+  console.log(obj_1);
+  function clone(origin) {
+    let originProto = Object.getPrototypeOf(origin);
+    return Object.assign(Object.create(originProto), origin);
+  }
+</script>
+
+</html>

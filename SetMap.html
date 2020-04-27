@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Set and Map</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+  let repetition_arr = new Set();
+  let origin_arr = [{
+    id: 1,
+    name: 'wu'
+  }, {
+    id: 2,
+    name: 'guang'
+  }];
+  let origin_arr1 = [{
+    id: 3,
+    name: 'weizhi1'
+  },
+  {
+    id: 2,
+    name: 'ceshi'
+  }, {
+    id: 2
+  }]
+  let arr_all = [...origin_arr, ...origin_arr1];
+  console.log(arr_all);
+  let contain_arr = [];
+  // arr_all.map((item, index) => {
+  //   let falg = true;
+  //   contain_arr.map((ele, index) => {
+  //     if (ele.id == item.id) {
+  //       falg = false;
+  //     }
+  //   })
+  //   if (falg) {
+  //     contain_arr.push(item);
+  //   }
+  // })
+
+  arr_all.map((item, index) => {
+    let falg = contain_arr.some((ele, index) => {
+      return ele.id == item.id;
+    })
+    if(!falg) {
+      contain_arr.push(item)
+    }
+  })
+  console.log(contain_arr,'数据')
+
+  let a = [1,2,3,4];
+  let s = a.filter((item) => item % 2 === 0);
+
+  console.log(s)
+</script>
+
+</html>

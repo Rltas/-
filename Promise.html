@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalabel=no">
+  <title>Promise</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+  function packPromise(val) {
+    return new Promise((resolve, reject) => {
+      if (val) {
+        resolve(val);
+      }
+    }).catch((value) => {
+      reject(value);
+    })
+  }
+  packPromise().then(res => {
+    console.log(res)
+  }, error => {
+    console.log(error)
+  })
+
+  // function timeOut(ms) {
+  //   return new Promise((resolve, reject) => {
+  //     setTimeout(resolve, ms, 'done');
+  //   });
+  // }
+  // timeOut(100).then(res => {
+  //   console.log(res)
+  // })
+
+  function sayInfo(val) {
+    console.log(val);
+  }
+  setTimeout(sayInfo, 1000, '568');
+
+  function loadImage(url) {
+    return new Promise((resolve, reject) => {
+      let image = new Image();
+      image.onload = () => {
+        resolve(image);
+      }
+      image.onerror = () => {
+        reject(new Error('Could not load image at' + url));
+      }
+      image.src = url;
+    })
+  }
+  loadImage('./img.jpg').then(res => {
+    document.body.prepend(res);
+  })
+
+  function filteEmptyData(obj) {
+    for (let key in obj) {
+      obj[key] ? obj[key] : delete obj[key];
+    }
+    return obj;
+  }
+
+  function joint(obj) {
+    obj = filteEmptyData(obj);
+    let resArr = [];
+    for (let key in obj) {
+      let str = `${key}=${obj[key]}`;
+      resArr.push(str);
+    }
+    return resArr.join('&');
+  }
+
+  function pack_ajax(url, data = {}, method, type = "application/x-www-form-urlencoded") {
+    let xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+    if (method == "get") {
+      xhr.open(method, `${url}?${joint(data)}`);
+      xhr.send();
+    } else {
+      xhr.open(method, url);
+      xhr.setRequestHeader("content-Type", type);
+      xhr.send(joint(data));
+    }
+    return new Promise((resolve, rejct) => {
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          resolve(JSON.parse(xhr.response));
+        }
+      }
+    }).catch((value) => {
+      reject(value)
+    })
+  }
+  pack_ajax('http://cs.yujiaojiaoyu.com/insurance/getVerifyCode.htm', { 'mobile': 18696522304 }, 'get').then(res => {
+    console.log(res)
+  })
+</script>
+
+</html>

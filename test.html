@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script src="./class.js"></script>
+<script>
+  class Sun extends Person {
+    constructor(val,...args) {
+      super(...args);
+      this.val = val;
+    }
+    sunSay() {
+      console.log(`${this.val}`);
+      super.sayName()
+    }
+  }
+  let p = new Sun('This year', 'Rltas', '27', 'Coder');
+  p.sunSay();
+</script>
+
+</html>
